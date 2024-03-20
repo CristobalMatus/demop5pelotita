@@ -1,7 +1,8 @@
 let video;
 let classifier;
 let resultsP;
-let modelo = 'https://teachablemachine.withgoogle.com/models/ltfG62v04/';
+//let modelo = 'https://teachablemachine.withgoogle.com/models/ltfG62v04/';
+let modelo = 'https://teachablemachine.withgoogle.com/models/2TFpRc6ZR/';
 
 let engine = Matter.Engine.create();
 
@@ -43,7 +44,7 @@ Matter.Render.run(render);
 
 function preload() {
   classifier = ml5.imageClassifier(modelo, modelReady)
-  resultsP = createP('loading model andf video...');
+  resultsP = createP('loading model and video...');
 }
 
 function setup() {
@@ -74,14 +75,14 @@ function gotResult(error, results) {
 
   const label = results[0].label;
 
-  if (label === 'girar') {
+  if (label === 'Girar') {
     Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: -3 });
 
-  } else if (label === 'reducir') {
+  } else if (label === 'Reducir') {
     Matter.Body.translate(ball, { x: -10, y: 0 });
-  } else if (label === 'aumentar') {
+  } else if (label === 'Aumentar') {
     Matter.Body.translate(ball, { x: 10, y: 0 });
-  } else if (label === 'disparar') {
+  } else if (label === 'Disparar') {
     Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: 3 });
   }
 
