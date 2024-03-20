@@ -36,20 +36,8 @@ let sling = Matter.Constraint.create({
   stiffness: 0.005
 });
 
-let firing = false;
-Matter.Events.on(mouseConstraint, 'mouseup', function (e) {
-  if (e.button === 0 && e.body === ball) firing = true;
-});
-Matter.Events.on(engine, 'afterUpdate', function () {
-  if (firing && Math.abs(ball.position.x - 300) < 20 && Math.abs(ball.position.y - 600) < 20) {
-    ball = Matter.Bodies.circle(200, 400, 20);
-    Matter.World.add(engine.world, ball);
-    sling.bodyB = ball;
-    firing = false;
-  }
-});
 
-Matter.World.add(engine.world, [ball, stack2, ground, sling, mouseConstraint]);
+Matter.World.add(engine.world, [ball, stack2, ground, mouseConstraint]);
 Matter.Engine.run(engine);
 Matter.Render.run(render);
 
@@ -87,13 +75,14 @@ function gotResult(error, results) {
   const label = results[0].label;
 
   if (label === 'girar') {
-    Matter.Body.rotate(sling.bodyB, 0.3);
+    Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: -3 });
+
   } else if (label === 'reducir') {
-    sling.stiffness += 0.0001;
+    Matter.Body.translate(ball, { x: -10, y: 0 });
   } else if (label === 'aumentar') {
-    sling.stiffness -= 0.0001;
+    Matter.Body.translate(ball, { x: 10, y: 0 });
   } else if (label === 'disparar') {
-    firing = true;
+    Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: 3 });
   }
 
   classifyVideo();
