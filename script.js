@@ -1,8 +1,8 @@
-let engine;
+/*let engine;
 let world;
 let ball;
 
-let handModel;
+let handModel = 'https://teachablemachine.withgoogle.com/models/ltfG62v04/';
 let isModelReady = false;
 
 function setup() {
@@ -60,7 +60,7 @@ function gotResult(error, results) {
 
 function draw() {
   background(0);
-  
+
   // Dibujar la pelota
   ball.show();
 
@@ -109,3 +109,69 @@ class Ball {
     ellipse(pos.x, pos.y, 40);
   }
 }
+*/
+
+// Crear el motor de física
+// Crear el motor de física
+// Crear el motor de física
+/*
+let engine = Matter.Engine.create();
+
+// Ajustar el tamaño de visualización
+let render = Matter.Render.create({
+  element: document.body,
+  engine: engine,
+  options: {
+    width: 800,
+    height: 600,
+  }
+});
+
+// Crear la restricción del mouse
+let mouse = Matter.Mouse.create(render.canvas);
+let mouseConstraint = Matter.MouseConstraint.create(engine, {
+  mouse: mouse,
+  constraint: {
+    render: { visible: false }
+  }
+});
+
+// Crear los cuerpos rígidos
+let ground = Matter.Bodies.rectangle(400, 600, 810, 60, { isStatic: true });
+
+// Crear un conjunto de polígonos apilados
+let stack2 = Matter.Composites.stack(400, 300, 4, 4, 0, 0, function (x, y) {
+  return Matter.Bodies.polygon(x, y, 8, 30);
+});
+
+// Crear una bola
+let ball = Matter.Bodies.circle(200, 400, 20);
+
+// Crear un tirachinas
+let sling = Matter.Constraint.create({
+  pointA: { x: 200, y: 400 },
+  bodyB: ball,
+  stiffness: 0.005
+});
+
+let firing = false;
+Matter.Events.on(mouseConstraint, 'mouseup', function (e) {
+  if (e.button === 0 && e.body === ball) firing = true;
+});
+Matter.Events.on(engine, 'afterUpdate', function () {
+  if (firing && Math.abs(ball.position.x - 300) < 20 && Math.abs(ball.position.y - 600) < 20) {
+    ball = Matter.Bodies.circle(200, 400, 20);
+    Matter.World.add(engine.world, ball);
+    sling.bodyB = ball;
+    firing = false;
+  }
+});
+
+Matter.World.add(engine.world, [ball, stack2, ground, sling, mouseConstraint]);
+// Iniciar el motor de física
+Matter.Engine.run(engine);
+
+// Iniciar el renderizador
+Matter.Render.run(render);
+**/
+
