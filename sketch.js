@@ -2,7 +2,8 @@ let video;
 let classifier;
 let resultsP;
 //let modelo = 'https://teachablemachine.withgoogle.com/models/ltfG62v04/';
-let modelo = 'https://teachablemachine.withgoogle.com/models/2TFpRc6ZR/';
+//let modelo = 'https://teachablemachine.withgoogle.com/models/2TFpRc6ZR/';
+let modelo = 'https://teachablemachine.withgoogle.com/models/YCq9OpgDv/'
 
 let engine = Matter.Engine.create();
 
@@ -51,6 +52,7 @@ function setup() {
   createCanvas(640, 640);
   video = createCapture(VIDEO);
   video.hide();
+  
 }
 
 function draw() {
@@ -74,17 +76,20 @@ function gotResult(error, results) {
   }
 
   const label = results[0].label;
+  const confidence = results[0].confidence;
+  
+  resultsP.html(`Label: ${label}<br>Confianza: ${confidence}`);
 
-  if (label === 'Girar') {
-    Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: -3 });
-
-  } else if (label === 'Reducir') {
-    Matter.Body.translate(ball, { x: -10, y: 0 });
-  } else if (label === 'Aumentar') {
-    Matter.Body.translate(ball, { x: 10, y: 0 });
-  } else if (label === 'Disparar') {
-    Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: 3 });
+  if (confidence >= 0.8) {
+    if (label === 'Girar') {
+      Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: -3 });
+    } else if (label === 'Reducir') {
+      Matter.Body.translate(ball, { x: -10, y: 0 });
+    } else if (label === 'Aumentar') {
+      Matter.Body.translate(ball, { x: 10, y: 0 });
+    } else if (label === 'Disparar') {
+      Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: 3 });
+    }
   }
-
   classifyVideo();
 }
