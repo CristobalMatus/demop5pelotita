@@ -2,8 +2,8 @@ let video;
 let classifier;
 let resultsP;
 //let modelo = 'https://teachablemachine.withgoogle.com/models/ltfG62v04/';
-//let modelo = 'https://teachablemachine.withgoogle.com/models/2TFpRc6ZR/';
-let modelo = 'https://teachablemachine.withgoogle.com/models/YCq9OpgDv/'
+let modelo = 'https://teachablemachine.withgoogle.com/models/2TFpRc6ZR/';
+//let modelo = 'https://teachablemachine.withgoogle.com/models/YCq9OpgDv/'
 
 let engine = Matter.Engine.create();
 
@@ -52,7 +52,6 @@ function setup() {
   createCanvas(640, 640);
   video = createCapture(VIDEO);
   video.hide();
-  
 }
 
 function draw() {
