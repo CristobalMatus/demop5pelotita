@@ -80,13 +80,13 @@ function gotResult(error, results) {
   resultsP.html(`Label: ${label}<br>Confianza: ${confidence}`);
 
   if (confidence >= 0.8) {
-    if (label === 'Girar') {
+    if (label === 'Subir') {
       Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: -3 });
-    } else if (label === 'Reducir') {
+    } else if (label === 'Izquierda') {
       Matter.Body.translate(ball, { x: -10, y: 0 });
-    } else if (label === 'Aumentar') {
+    } else if (label === 'Derecha') {
       Matter.Body.translate(ball, { x: 10, y: 0 });
-    } else if (label === 'Disparar') {
+    } else if (label === 'Bajar') {
       Matter.Body.setVelocity(ball, { x: ball.velocity.x, y: 3 });
     }
   }
